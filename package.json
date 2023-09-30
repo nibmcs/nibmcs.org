@@ -12,7 +12,7 @@
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.16.7",
     "find-cache-dir": "^5.0.0",
-    "next": "latest",
+    "next": "13.4.9",
     "next-sanity": "^5.5.4",
     "react": "latest",
     "react-dom": "latest",
