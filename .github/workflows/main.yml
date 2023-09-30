@@ -37,8 +37,7 @@ jobs:
 
       - name: Deploy to Netlify
         run: |
-          # Use the Netlify CLI to deploy the built project
-          netlify deploy --prod --dir .next/server/app # Adjust the --dir flag if needed
+          netlify deploy --prod
 
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
