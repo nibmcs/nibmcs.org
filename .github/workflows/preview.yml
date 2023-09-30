@@ -5,7 +5,7 @@ on:
     types:
       - opened
       - synchronize
-      - reopened
+      - edited
 
 jobs:
   preview_deploy:
@@ -26,6 +26,7 @@ jobs:
         run: npm run build
 
       - name: Deploy to Netlify
-        run: npx netlify-cli deploy --dir=./out --message="Preview deployment for PR #${{ github.event.pull_request.number }}" --json --auth="${{ secrets.NETLIFY_AUTH_TOKEN }}"
-        env:
+        uses: veloii/action-netlify-deploy@v2.2.1
+        with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
