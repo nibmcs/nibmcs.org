@@ -39,3 +39,6 @@ next-env.d.ts
 
 # Netlify build
 out_*
+
+#npm cache
+.npm
