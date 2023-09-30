@@ -1,0 +1,32 @@
+{
+  "name": "nibmcs.org",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@sanity/image-url": "^1.0.2",
+    "@sanity/vision": "^3.16.7",
+    "next": "latest",
+    "next-sanity": "^5.5.4",
+    "react": "latest",
+    "react-dom": "latest",
+    "sanity": "^3.16.7",
+    "styled-components": "5.2"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "autoprefixer": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest",
+    "typescript": "latest"
+  }
+}

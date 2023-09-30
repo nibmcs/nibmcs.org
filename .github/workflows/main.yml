@@ -1,0 +1,21 @@
+name: Docker Build and Run
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and run Docker container
+        env:
+          NODE_ENV: production
+        run: |
+          docker build -t nibmcs-web-app .
+          docker run -p 3000:3000 nibmcs-web-app
