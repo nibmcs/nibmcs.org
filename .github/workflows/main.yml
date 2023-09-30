@@ -34,9 +34,6 @@ jobs:
         run: |
           npm ci
 
-      # Using `netlify build` to build the website.
-      # It will run the command specified on `netlify.toml` (`npm run build`)
-      # and use the necessary plugin
       - name: Build project
         id: build-netlify
         run: |
@@ -45,8 +42,6 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
-      # Deploys the website to Netlify extracting the deploy metadata.
-      # Adapted from the Netlify Github Action.
       - name: Production deployment
         id: deploy-netlify
         run: |
