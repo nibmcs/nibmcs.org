@@ -17,5 +17,5 @@ jobs:
         env:
           NODE_ENV: production
         run: |
-          docker build -t nibmcs-web-app .
-          docker run -p 3000:3000 nibmcs-web-app
+          sudo docker build -t nibmcs-web-app .
+          sudo docker run -p 3000:3000 nibmcs-web-app
