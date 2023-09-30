@@ -33,9 +33,8 @@ jobs:
 
       - name: Build and Deploy to Netlify
         run: |
-          # Build and deploy the project using netlify deploy --build
-          npm run build # Replace with your actual build command
-          npx netlify deploy --prod --build
+          npm run build 
+          netlify deploy --prod --build
 
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
