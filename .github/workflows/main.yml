@@ -15,19 +15,12 @@ jobs:
 
       - name: Stop and remove previous Docker container
         run: |
-          # Check if a container is running on port 3000
-          if sudo docker ps -q --filter "ancestor=nibmcs-web-app" --filter "expose=3000/tcp"; then
-            echo "Stopping and removing the previous container..."
-            sudo docker stop $(sudo docker ps -q --filter "ancestor=nibmcs-web-app" --filter "expose=3000/tcp")
-            sudo docker rm $(sudo docker ps -aq --filter "ancestor=nibmcs-web-app" --filter "expose=3000/tcp")
-          else
-            echo "No previous container found on port 3000."
-          fi
-        continue-on-error: true
+          sudo docker stop nibmcs-web-app || true
+          sudo docker rm nibmcs-web-app || true
 
       - name: Build and run Docker container
         env:
           NODE_ENV: production
         run: |
           sudo docker build -t nibmcs-web-app .
-          sudo docker run -d -p 3000:3000 nibmcs-web-app
+          sudo docker run -d -p 3000:3000 --name nibmcs-web-app nibmcs-web-app
