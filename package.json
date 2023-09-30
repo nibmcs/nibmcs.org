@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "next-on-netlify"
   },
   "dependencies": {
     "@sanity/image-url": "^1.0.2",
@@ -25,6 +26,7 @@
     "autoprefixer": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
+    "next-on-netlify": "^3.0.1",
     "postcss": "latest",
     "tailwindcss": "latest",
     "typescript": "latest"
