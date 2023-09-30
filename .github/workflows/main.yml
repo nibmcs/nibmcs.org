@@ -6,38 +6,36 @@ on:
       - ci-cd-workflow
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    name: Build and Deploy
+    name: Deploy to Netlify
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Caching
-        uses: actions/cache@v2
-        with:
-          path: |
-            **/node_modules
-            .next # Cache the .next directory
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Use Node.js 18.18.0
         uses: actions/setup-node@v2
         with:
           node-version: 18.18.0
 
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            **/package-lock.json
+
       - name: Install dependencies
         run: |
           npm ci
 
-      - name: Build project
+      - name: Build and Deploy to Netlify
         run: |
-          # Build your Next.js project
-          npm run build
-
-      - name: Deploy to Netlify
-        run: |
-          netlify deploy --prod
+          # Build and deploy the project using netlify deploy --build
+          npm run build # Replace with your actual build command
+          npx netlify deploy --prod --build
 
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
