@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postbuild": "next-on-netlify"
+    "lint": "next lint"
   },
   "dependencies": {
     "@sanity/image-url": "^1.0.2",
@@ -21,15 +20,12 @@
     "styled-components": "5.2"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^4.40.1",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "autoprefixer": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
-    "netlify-cli": "^16.4.2",
-    "next-on-netlify": "^3.0.1",
     "postcss": "latest",
     "tailwindcss": "latest",
     "typescript": "latest"
