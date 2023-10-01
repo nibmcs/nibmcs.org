@@ -27,10 +27,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - run: npm ci
-
-  preview:
-    runs-on: ubuntu-latest
-    steps:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.1
         with:
