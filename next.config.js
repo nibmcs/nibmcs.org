@@ -2,9 +2,6 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-    buildOptimizations: {
-      cache: true,
-    },
   },
 };
 

@@ -2,20 +2,55 @@ name: Branch Preview Comment
 
 on:
   pull_request:
-    types: ['opened', 'edited', 'synchronize']
+    types:
+      - opened
+  push:
+    branches:
+      - '*'
 
 jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - name: deploy to preview mode
-        uses: thundermiracle/netlify-deploy@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN}}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID}}
-          install-command: npm ci
-          build-command: npm run build
-          cache-strategy: npm
-          deploy-dir: '.next'
-          production: false
-          node: 18.18.0
+          node-version: 18.18.0
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            **/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          npm ci
+
+      - name: Build to .next
+        id: build-app
+        run: |
+          npm run build
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2.0
+        with:
+          publish-dir: '.next'
+          production-branch: main
+          github-token: ${{ secrets.GH_TOKEN }}
+          deploy-message: 'Deploy from GitHub Actions'
+          enable-pull-request-comment: true
+          enable-commit-comment: false
+          overwrites-pull-request-comment: true
+          netlify-config-path: ./netlify.toml
+          alias: deploy-preview-${{ github.event.number }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
+        timeout-minutes: 1
