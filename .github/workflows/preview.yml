@@ -18,25 +18,14 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 18.18.0
 
-      - name: Get Netlify Preview URL
-        id: netlify_preview
-        run: |
-          # Use Netlify API to get the preview URL based on branch name
-          BRANCH_NAME=$(echo "${{ github.ref }}" | sed 's/refs\/heads\///')
-          PREVIEW_URL=$(curl -s "https://api.netlify.com/api/v1/sites/YOUR_NETLIFY_PREVIEW_SITE_ID/deploys?per_page=100" | jq -r ".[] | select(.context == \"deploy-preview-$BRANCH_NAME\") | .deploy_url")
-          echo "::set-output name=preview_url::$PREVIEW_URL"
+      # Publish the inspect and preview link to the PR
+      - name: 👓 Netlify Preview URL
+        uses: unsplash/comment-on-pr@master
         env:
-          NETLIFY_PREVIEW_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }} # Use the site ID for your branch previews
-
-      - name: Post Preview URL as Comment
-        if: steps.netlify_preview.outputs.preview_url != null
-        run: |
-          # Post the preview URL as a comment on the related PR
-          PREVIEW_URL=${{ steps.netlify_preview.outputs.preview_url }}
-          echo "Preview URL: $PREVIEW_URL"
-          GITHUB_TOKEN="${{ secrets.GH_TOKEN }}"
-          COMMENT_BODY=":rocket: The branch preview for this PR is available [here]($PREVIEW_URL). Enjoy testing!"
-          API_URL="https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments"
-          curl -X POST -H "Authorization: token $GITHUB_TOKEN" -d "{\"body\":\"$COMMENT_BODY\"}" $API_URL
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          OUTPUT: "This pull request is being automatically deployed to Netlify.\n\n✅ Preview: ${{ steps.deploy-netlify.outputs.NETLIFY_URL }}"
+        with:
+          msg: ${{ env.OUTPUT }}
+          check_for_duplicate_msg: false
