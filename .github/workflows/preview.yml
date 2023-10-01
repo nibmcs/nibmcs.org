@@ -1,48 +1,43 @@
 name: Branch Preview Comment
 
 on:
-  pull_request:
-    types:
-      - opened
   push:
-    branches:
-      - '*'
+  pull_request:
+
+permissions:
+  statuses: write
+  deployments: write
+  pull-requests: write
 
 jobs:
-  comment:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 18.18.0
-
+      - uses: actions/checkout@v4
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
+        id: npm-cache
         with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            **/package-lock.json
+            ${{ runner.os }}-node-
+      - run: npm ci
+      - run: npm run all
 
-      - name: Install dependencies
-        run: |
-          npm ci
-
-      - name: Build to .next
-        id: build-app
-        run: |
-          npm run build
-
+  preview:
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v2.0
+        uses: nwtgck/actions-netlify@v2.1
         with:
           publish-dir: './.next'
           production-branch: main
+          production-deploy: true
           github-token: ${{ secrets.GH_TOKEN }}
           deploy-message: Deploy preview from ${{ github.event.pull_request.head.ref }}
           enable-pull-request-comment: true
