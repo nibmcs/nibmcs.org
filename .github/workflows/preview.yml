@@ -34,17 +34,21 @@ jobs:
           npm ci
 
       - name: Build and Deploy to Netlify
-        run: npm run build
-      - uses: nwtgck/actions-netlify@v2.0
-        with:
-          publish-dir: '.next'
-          production-branch: main
-          github-token: ${{ secrets.GH_TOKEN }}
-          deploy-message: 'Deploy from GitHub Actions'
-          enable-pull-request-comment: true
-          enable-commit-comment: true
-          overwrites-pull-request-comment: true
+        id: deploy-netlify
+        run: |
+          npm run build 
+          netlify deploy -m ${{ github.head_ref }} --alias ${{ github.head_ref }} --prod --build
+
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
-        timeout-minutes: 1
+
+      # Publish the inspect and preview link to the PR
+      - name: 👓 Netlify Preview URL
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          OUTPUT: "This pull request is being automatically deployed to Netlify.\n\n✅ Preview: ${{ steps.deploy-netlify.outputs.NETLIFY_URL }}"
+        with:
+          msg: ${{ env.OUTPUT }}
+          check_for_duplicate_msg: false
