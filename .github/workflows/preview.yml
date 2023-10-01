@@ -32,6 +32,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
+          npm run build
 
       - name: Build and Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
