@@ -52,5 +52,8 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `Deploy preview: ${{ steps.build-app.outputs.deploy-url }}`
+              body: `Deploy preview:`
             })
+
+      - name: Set output
+        run: echo "${{steps.set-result.outputs.result}}"
