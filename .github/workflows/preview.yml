@@ -33,6 +33,11 @@ jobs:
         run: |
           npm ci
 
+      - name: Build to .next
+        id: build-app
+        run: |
+          npm run build
+
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
         with:
@@ -41,7 +46,7 @@ jobs:
           github-token: ${{ secrets.GH_TOKEN }}
           deploy-message: 'Deploy from GitHub Actions'
           enable-pull-request-comment: true
-          enable-commit-comment: true
+          enable-commit-comment: false
           overwrites-pull-request-comment: true
           netlify-config-path: ./netlify.toml
           alias: deploy-preview-${{ github.event.number }}
