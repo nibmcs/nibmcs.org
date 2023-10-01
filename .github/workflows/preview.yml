@@ -15,4 +15,4 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID}}
           deploy-dir: '.next'
           production: false
-          node: 18.18.1
+          node: 18.18.0
