@@ -2,53 +2,17 @@ name: Branch Preview Comment
 
 on:
   pull_request:
-    types:
-      - opened
-  push:
-    branches:
-      - '*'
+    types: ['opened', 'edited', 'synchronize']
 
 jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: deploy to preview mode
+        uses: thundermiracle/netlify-deploy@v3
         with:
-          node-version: 18.18.0
-
-      - name: Cache node modules
-        uses: actions/cache@v2
-        with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            **/package-lock.json
-
-      - name: Install dependencies
-        run: |
-          npm ci
-
-      - name: Build and Deploy to Netlify
-        id: deploy-netlify
-        run: |
-          npm run build 
-          netlify deploy --prod --build
-
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
-
-      # Publish the inspect and preview link to the PR
-      - name: 👓 Netlify Preview URL
-        uses: unsplash/comment-on-pr@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          OUTPUT: "This pull request is being automatically deployed to Netlify.\n\n✅ Preview: ${{ steps.deploy-netlify.outputs.deploy-url}}"
-        with:
-          msg: ${{ env.OUTPUT }}
-          check_for_duplicate_msg: false
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN}}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID}}
+          deploy-dir: '.next'
+          production: false
+          node: 18.18.1
