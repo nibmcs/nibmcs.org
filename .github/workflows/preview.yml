@@ -41,10 +41,10 @@ jobs:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
         with:
-          publish-dir: .next
+          publish-dir: /.next
           production-branch: main
           github-token: ${{ secrets.GH_TOKEN }}
-          deploy-message: ${{ github.event.pull_request.title }}
+          deploy-message: Deploy preview from ${{ github.event.pull_request.head.ref }}
           enable-pull-request-comment: true
           enable-commit-comment: false
           overwrites-pull-request-comment: true
