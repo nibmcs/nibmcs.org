@@ -37,7 +37,7 @@ jobs:
         id: deploy-netlify
         run: |
           npm run build 
-          netlify deploy -m ${{ github.head_ref }} --alias ${{ github.head_ref }} --prod --build
+          netlify deploy --prod --build
 
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
