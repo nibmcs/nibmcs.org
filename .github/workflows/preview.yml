@@ -1,13 +1,12 @@
 name: Branch Preview Comment
 
 on:
-  push:
   pull_request:
-
-permissions:
-  statuses: write
-  deployments: write
-  pull-requests: write
+    types:
+      - opened
+  push:
+    branches:
+      - '*'
 
 jobs:
   build:
@@ -27,6 +26,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - run: npm ci
+      - run: npm run build
+
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.1
         with:
