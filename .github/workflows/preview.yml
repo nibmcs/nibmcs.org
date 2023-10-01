@@ -13,6 +13,9 @@ jobs:
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN}}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID}}
+          install-command: npm ci
+          build-command: npm run build
+          cache-strategy: npm
           deploy-dir: '.next'
           production: false
           node: 18.18.0
