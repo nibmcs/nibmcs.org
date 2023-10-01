@@ -44,13 +44,13 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
 
       - name: Comment on PR
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GH_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `Deploy preview: ${steps.build-app.outputs.deploy-url}`
+              body: `Deploy preview: ${{ steps.build-app.outputs.deploy-url }}`
             })
