@@ -33,23 +33,24 @@ jobs:
         run: |
           npm ci
 
-      - name: Build to .next
+      - name: Build and Deploy to Netlify
         id: build-app
         run: |
           npm run build
+          netlify deploy --build --prod
 
-      - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v2.0
-        with:
-          publish-dir: './build'
-          production-branch: main
-          github-token: ${{ secrets.GH_TOKEN }}
-          deploy-message: Deploy preview from ${{ github.event.pull_request.head.ref }}
-          enable-pull-request-comment: true
-          enable-commit-comment: false
-          overwrites-pull-request-comment: true
-          netlify-config-path: ./netlify.toml
-          alias: deploy-preview-${{ github.event.number }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
+
+      - name: Comment on PR
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `Deploy preview: ${steps.build-app.outputs.deploy-url}`
+            })
