@@ -32,8 +32,22 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build & Deploy to Netlify
-        id: deploy
-        run: netlify deploy --build --context deploy-preview --alias 'pr-review-${{ github.event.number }}' --json
+        id: netlify_deploy
+        run: |
+          NETLIFY_AUTH_TOKEN="${{ secrets.NETLIFY_AUTH_TOKEN }}"
+          NETLIFY_SITE_ID="${{ secrets.NETLIFY_PREVIEW_SITE_ID }}"
+          PR_NUMBER="${{ github.event.number }}"
+
+          # Run the Netlify deploy command
+          DEPLOY_OUTPUT=$(netlify deploy --build --context deploy-preview --alias "pr-review-${PR_NUMBER}" --json)
+
+          # Extract the URLs from the JSON output using jq
+          DEPLOY_URL=$(echo "$DEPLOY_OUTPUT" | jq -r '.deploy_url')
+          LOGS_URL=$(echo "$DEPLOY_OUTPUT" | jq -r '.logs')
+
+          # Set outputs for later use
+          echo "::set-output name=deploy_url::${DEPLOY_URL}"
+          echo "::set-output name=logs_url::${LOGS_URL}"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
@@ -42,7 +56,7 @@ jobs:
         with:
           message: |
             This pull request is being automatically deployed to Netlify.
-            ✅ Preview: ${{ steps.deploy.outputs.deploy-url }}
+            ✅ Preview: ${{ steps.netlify_deploy.outputs.deploy_url }}
             🔖 Deployed version: ${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
