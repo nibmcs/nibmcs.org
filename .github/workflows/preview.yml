@@ -4,9 +4,9 @@ on:
   pull_request:
     types:
       - opened
-  push:
-    branches:
-      - '*'
+      - synchronize
+      - reopened
+      - edited
 
 jobs:
   build:
@@ -41,11 +41,9 @@ jobs:
 
           # Extract the URLs from the JSON output using jq
           DEPLOY_URL=$(echo "$DEPLOY_OUTPUT" | jq -r '.deploy_url')
-          LOGS_URL=$(echo "$DEPLOY_OUTPUT" | jq -r '.logs')
 
           # Set outputs for later use
-          echo "::set-output name=deploy_url::${DEPLOY_URL}"
-          echo "::set-output name=logs_url::${LOGS_URL}"
+          echo "{deploy_url}=${DEPLOY_URL}" >> $GITHUB_OUTPUT
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
