@@ -24,15 +24,17 @@ jobs:
         id: npm-cache
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - name: Install dependencies
         run: npm ci
-      - name: Add SHORT_SHA env property with commit short sha
-        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+      - name: Add sha_short env property with commit short sha
+        run: echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
       - name: Build & Deploy to Netlify
-        run: netlify deploy --build --context deploy-preview --alias 'pr-review-${SHORT_SHA}'
+        run: netlify deploy --build --context deploy-preview --alias 'pr-review-${{ env.sha_short }}'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
@@ -42,7 +44,7 @@ jobs:
           message: |
             This pull request is being automatically deployed to Netlify.
 
-            ✅ Preview: https://deploy-preview--stirring-maamoul-${SHORT_SHA}.netlify.app
+            ✅ Preview: https://deploy-preview--stirring-maamoul-${{ env.sha_short }}.netlify.app
             🔖 Deployed version: ${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
