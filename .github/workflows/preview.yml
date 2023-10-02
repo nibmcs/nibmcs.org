@@ -29,19 +29,20 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm ci
+      - name: Add SHORT_SHA env property with commit short sha
+        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
       - name: Build & Deploy to Netlify
-        run: netlify deploy --build --context deploy-preview --alias 'pr-review-${{ github.event.number }}'
+        run: netlify deploy --build --context deploy-preview --alias 'pr-review-${SHORT_SHA}'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
-          PR_NUMBER: ${{ github.event.number }}
       - name: Comment on PR
         uses: mshick/add-pr-comment@v2
         with:
           message: |
             This pull request is being automatically deployed to Netlify.
 
-            ✅ Preview: https://deploy-preview--stirring-maamoul-${{ env.PR_NUMBER }}.netlify.app
+            ✅ Preview: https://deploy-preview--stirring-maamoul-${SHORT_SHA}.netlify.app
             🔖 Deployed version: ${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
