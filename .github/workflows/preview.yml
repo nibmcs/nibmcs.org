@@ -42,7 +42,7 @@ jobs:
           enable-commit-comment: true
           overwrites-pull-request-comment: true
           netlify-config-path: ./netlify.toml
-          functions-dir: ./netlify/functions
+          functions-dir: ./.netlify/functions
 
           alias: deploy-preview-${{ github.event.number }}
         env:
