@@ -1,0 +1,61 @@
+name: Branch Preview Comment
+
+on:
+  pull_request:
+    types:
+      - opened
+  push:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.18.0
+      - uses: actions/checkout@v4
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            **/package-lock.json
+      - name: Install dependencies
+        run: npm install
+      - name: Build & Deploy to Netlify
+        id: netlify_deploy
+        run: |
+          NETLIFY_AUTH_TOKEN="${{ secrets.NETLIFY_AUTH_TOKEN }}"
+          NETLIFY_SITE_ID="${{ secrets.NETLIFY_PREVIEW_SITE_ID }}"
+          PR_NUMBER="${{ github.event.number }}"
+
+          # Run the Netlify deploy command
+          DEPLOY_OUTPUT=$(netlify deploy --build --context deploy-preview --alias "pr-review-${PR_NUMBER}" --json)
+
+          # Extract the URLs from the JSON output using jq
+          DEPLOY_URL=$(echo "$DEPLOY_OUTPUT" | jq -r '.deploy_url')
+          LOGS_URL=$(echo "$DEPLOY_OUTPUT" | jq -r '.logs')
+
+          # Set outputs for later use
+          echo "::set-output name=deploy_url::${DEPLOY_URL}"
+          echo "::set-output name=logs_url::${LOGS_URL}"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
+      - name: Comment on PR
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+            This pull request is being automatically deployed to Netlify.
+
+            ✅ Preview: ${{ steps.netlify_deploy.outputs.deploy_url }}
+            🔖 Deployed version: ${{ github.sha }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

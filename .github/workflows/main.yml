@@ -33,7 +33,6 @@ jobs:
 
       - name: Build and Deploy to Netlify
         run: |
-          npm run build 
           netlify deploy --prod --build
 
         env:
