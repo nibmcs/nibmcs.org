@@ -25,28 +25,20 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - run: npm ci
-      - run: npm install -D @netlify/plugin-nextjs
-      - run: netlify build --context deploy-preview
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
-
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v2.1
-        with:
-          publish-dir: './build'
-          production-branch: main
-          github-token: ${{ secrets.GH_TOKEN }}
-          deploy-message: Deploy preview from ${{ github.event.pull_request.head.ref }}
-          enable-pull-request-comment: true
-          enable-commit-comment: true
-          overwrites-pull-request-comment: true
-          netlify-config-path: ./netlify.toml
-          functions-dir: ./.netlify/functions
-          github-deployment-environment: pr-preview
-
-          alias: deploy-preview-${{ github.event.number }}
+        run: netlify deploy --build --context deploy-preview --alias 'pr-review-${{ github.event.number }}'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
+      - name: Comment on PR
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            This pull request is being automatically deployed to Netlify.\n\n✅ Preview: pr-review-${{ github.event.number }}.netlify.app\n\n🔖 Deployed version: ${{ github.sha }}
+          reactions: eyes, rocket
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
