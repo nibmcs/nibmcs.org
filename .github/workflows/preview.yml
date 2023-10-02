@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build & Deploy to Netlify
-        run: netlify deploy --build --context deploy-preview --alias 'pr-review-${{ github.sha }}'
+        run: netlify deploy --build --context deploy-preview --alias 'pr-review-${{ github.event.number }}'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
@@ -38,7 +38,7 @@ jobs:
         uses: mshick/add-pr-comment@v2
         with:
           message: |
-            ✅ Preview: https://pr-review--stirring-maamoul-${{ github.sha }}.netlify.app
+            ✅ Preview: https://pr-review--stirring-maamoul-${{ github.event.number }}.netlify.app
 
             🔖 Deployed version: ${{ github.sha }}
         env:
