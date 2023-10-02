@@ -30,11 +30,10 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install dependencies
-        run: npm ci
-      - name: Add sha_short env property with commit short sha
-        run: echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
+        run: npm install
       - name: Build & Deploy to Netlify
-        run: netlify deploy --build --context deploy-preview --alias 'pr-review-${{ env.sha_short }}'
+        id: deploy
+        run: netlify deploy --build --context deploy-preview --alias 'pr-review-${{ github.event.number }}'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
@@ -43,8 +42,7 @@ jobs:
         with:
           message: |
             This pull request is being automatically deployed to Netlify.
-
-            ✅ Preview: https://deploy-preview--stirring-maamoul-${{ env.sha_short }}.netlify.app
+            ✅ Preview: ${{ steps.deploy.outputs.deploy-url }}
             🔖 Deployed version: ${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
