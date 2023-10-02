@@ -34,7 +34,7 @@ jobs:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.1
         with:
-          publish-dir: './build'
+          publish-dir: './.next'
           production-branch: main
           github-token: ${{ secrets.GH_TOKEN }}
           deploy-message: Deploy preview from ${{ github.event.pull_request.head.ref }}
@@ -43,6 +43,7 @@ jobs:
           overwrites-pull-request-comment: true
           netlify-config-path: ./netlify.toml
           functions-dir: ./.netlify/functions
+          github-deployment-environment: pr-preview
 
           alias: deploy-preview-${{ github.event.number }}
         env:
