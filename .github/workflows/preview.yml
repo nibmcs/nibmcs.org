@@ -34,12 +34,14 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
+          PR_NUMBER: ${{ github.event.number }}
       - name: Comment on PR
         uses: mshick/add-pr-comment@v2
         with:
           message: |
-            ✅ Preview: https://pr-review--stirring-maamoul-${{ github.event.number }}.netlify.app
+            This pull request is being automatically deployed to Netlify.
 
+            ✅ Preview: https://deploy-preview--stirring-maamoul-${{ env.PR_NUMBER }}.netlify.app
             🔖 Deployed version: ${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
