@@ -43,7 +43,7 @@ jobs:
           DEPLOY_URL=$(echo "$DEPLOY_OUTPUT" | jq -r '.deploy_url')
 
           # Set outputs for later use
-          echo "{deploy_url}=${DEPLOY_URL}" >> $GITHUB_OUTPUT
+          echo "deploy_url=${DEPLOY_URL}" >>$GITHUB_OUTPUT
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
