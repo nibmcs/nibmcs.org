@@ -10,9 +10,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nextui-org/react": "^2.1.13",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.16.7",
     "find-cache-dir": "^5.0.0",
+    "framer-motion": "^10.16.4",
     "next": "13.4.9",
     "next-sanity": "^5.5.4",
     "react": "latest",
@@ -25,11 +27,11 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "autoprefixer": "latest",
+    "autoprefixer": "^10.4.16",
     "eslint": "latest",
     "eslint-config-next": "latest",
-    "postcss": "latest",
-    "tailwindcss": "latest",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.3",
     "typescript": "latest"
   }
 }
