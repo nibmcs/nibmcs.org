@@ -7,7 +7,7 @@ const iconSize = 18;
 const className = "text-default-500";
 
 export const Logo = () => (
-  <Image alt="NIBM CS Logo" src="/logo.png" height={80} width={80} />
+  <Image alt="NIBM CS Logo" src="/logo.png" priority height={45} width={80} />
 );
 
 export const FacebookIcon = () => {

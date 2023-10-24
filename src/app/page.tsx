@@ -10,7 +10,8 @@ export default function Home() {
         src="/logo.png"
         alt="logo"
         width={200}
-        height={200}
+        height={112.5}
+        priority
         className="mt-10"
       />
       <div className="text-center text-xl font-normal mt-10">Home Page</div>
