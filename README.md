@@ -69,7 +69,7 @@ Follow these steps to set up and run the project locally:
    docker run -p 3000:3000 nibmcs-website
    ```
 
-   This will build a Docker image for the website and run it on port 3000. After running the container, you can access the website by opening your web browser and visiting http://localhost:3000.
+   This will build a Docker image for the website and run it on port 3000. After running the container, you can access the website by opening your web browser and visiting <http://localhost:3000>.
 
    **Local Development (Without Docker)**:
 
@@ -80,7 +80,7 @@ Follow these steps to set up and run the project locally:
    npm run dev
    ```
 
-   This will start the application without Docker, and you can access it by opening your web browser and visiting http://localhost:3000.
+   This will start the application without Docker, and you can access it by opening your web browser and visiting <http://localhost:3000>.
 
 ## Contributing
 
