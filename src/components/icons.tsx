@@ -1,6 +1,6 @@
 import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { MdDarkMode, MdLightMode, MdLocationOn, MdCalendarMonth } from "react-icons/md";
 import Image from "next/image";
 
 const iconSize = 18;
@@ -36,4 +36,12 @@ export const DarkModeIcon = () => {
 
 export const LightModeIcon = () => {
   return <MdLightMode size={iconSize} className={className} />;
+};
+
+export const LocationPinIcon = () => {
+  return <MdLocationOn size={iconSize} className={className} />;
+};
+
+export const DateIcon = () => {
+  return <MdCalendarMonth size={iconSize} className={className} />;
 };
