@@ -32,13 +32,13 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center pt-2" href="/">
-            <Logo />
+            <Logo priority={true} height={45} width={80} />
           </NextLink>
         </NavbarBrand>
         <ul className="hidden md:flex gap-5 justify-start ml-4">
           {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
-              <NextLink
+            <NavbarItem as="li" key={item.href}>
+              <Link
                 className={clsx(
                   linkStyles({ color: "foreground" }),
                   "data-[active=true]:text-primary data-[active=true]:font-medium"
@@ -47,7 +47,7 @@ export const Navbar = () => {
                 href={item.href}
               >
                 {item.label}
-              </NextLink>
+              </Link>
             </NavbarItem>
           ))}
         </ul>
