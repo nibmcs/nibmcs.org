@@ -32,7 +32,7 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center pt-2" href="/">
-            <Logo />
+            <Logo priority={true} height={45} width={80} />
           </NextLink>
         </NavbarBrand>
         <ul className="hidden md:flex gap-5 justify-start ml-4">

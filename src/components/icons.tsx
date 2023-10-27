@@ -6,8 +6,34 @@ import Image from "next/image";
 const iconSize = 18;
 const className = "text-default-500";
 
-export const Logo = () => (
-  <Image alt="NIBM CS Logo" src="/logo.png" priority height={45} width={80} />
+interface ThemedImageProps {
+  className?: string;
+  width?: number;
+  height?: number;
+  priority?: boolean;
+}
+
+export const Logo = ({ className, width = 200, height = 112.5, priority = false }: ThemedImageProps) => (
+  <>
+    {/* When the theme is dark */}
+    <Image
+      src="/logo.png"
+      width={width}
+      height={height}
+      alt="NCS LOGO"
+      className={`hidden dark:block ${className}`}
+      priority={priority}
+    />
+
+    {/* When the theme is light */}
+    <Image
+      src="/NCS-logo-color.png"
+      width={width}
+      height={height}
+      alt="NCS LOGO"
+      className={`block dark:hidden ${className}`}
+      priority={priority} />
+  </>
 );
 
 export const FacebookIcon = () => {
