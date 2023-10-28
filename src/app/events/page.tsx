@@ -21,7 +21,7 @@ export default function EventsPage() {
             isZoomed
             alt="Git & Github Event"
             className="object-cover"
-            src="/thumbnail.jpg"
+            src="/events/01/thumbnail.jpg"
             height={280}
             width={350}
           />
@@ -46,7 +46,7 @@ export default function EventsPage() {
               <span className="font-light pl-1" style={{ fontSize: '75%' }}>NIBM</span>
             </>
           </div>
-          <div className="text-tiny text-white/80 px-2 text-center">
+          <div className="text-tiny px-2 text-center">
             <p>Introduction to Git & GitHub conducted by GitHub Campus Expert Suvin Nimnaka</p>
           </div>
         </CardBody>

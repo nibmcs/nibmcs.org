@@ -1,4 +1,5 @@
-
+import Body from '../../components/body';
+import Header from '../../components/header';
 interface PageProps {
     params: {
         id: string
@@ -7,8 +8,9 @@ interface PageProps {
 
 export default function EventPage({ params }: PageProps) {
     return (
-        <div>
-            <h4>hiii... {params.id}</h4>
-        </div>
+        <>
+            <Header params={{ id: '1' }} />
+            <Body params={{ id: '1' }} />
+        </>
     )
 }
