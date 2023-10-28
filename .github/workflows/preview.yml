@@ -1,9 +1,6 @@
-name: Branch Preview Comment
+name: PR Preview Comment
 
 on:
-  push:
-    branches-ignore:
-      - main
   pull_request:
     types:
       - opened
@@ -31,7 +28,7 @@ jobs:
           restore-keys: |
             **/package-lock.json
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Build & Deploy to Netlify
         id: netlify_deploy
         run: |
