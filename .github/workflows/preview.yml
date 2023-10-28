@@ -1,4 +1,4 @@
-name: Branch Preview Comment
+name: PR Preview Comment
 
 on:
   pull_request:
