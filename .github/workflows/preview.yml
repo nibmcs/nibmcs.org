@@ -28,7 +28,7 @@ jobs:
           restore-keys: |
             **/package-lock.json
       - name: Install dependencies
-        run: npm ci
+        run: npm install
       - name: Build & Deploy to Netlify
         id: netlify_deploy
         run: |
