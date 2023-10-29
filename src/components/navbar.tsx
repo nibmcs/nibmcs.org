@@ -1,5 +1,6 @@
 'use client';
 
+import { use, useEffect, useState } from 'react';
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -9,32 +10,48 @@ import {
   NavbarItem,
   NavbarMenuItem,
 } from '@nextui-org/navbar';
+import { motion } from 'framer-motion';
+import { fadeIn } from '../../variants';
 import { Button } from '@nextui-org/react';
 import { Link } from '@nextui-org/link';
-
 import { link as linkStyles } from '@nextui-org/theme';
-
 import { siteConfig } from '@/config/site';
 import NextLink from 'next/link';
 import clsx from 'clsx';
-
-import { ThemeSwitch } from '@/components/theme-switch';
-// import {
-//   TwitterIcon,
-//   GithubIcon,
-//   FacebookIcon,
-//   LinkedinIcon,
-//   InstagramIcon,
-// } from '@/components/icons';
-
+import { useRouter, usePathname } from 'next/navigation';
 import { Logo } from '@/components/icons';
 
 export const Navbar = () => {
+  const [scrolling, setScrolling] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+  console.log(pathname);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolling(true);
+      } else {
+        setScrolling(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <NextUINavbar
       maxWidth='lg'
       position='sticky'
-      className=' bg-background/0 backdrop-blur-none data-[menu-open=true]:backdrop-blur-none backdrop-saturate-1000 p-5'
+      className={`${
+        scrolling
+          ? 'bg-black  backdrop-blur data-[menu-open=false]:backdrop-blur backdrop-saturate-50 p-5'
+          : 'bg-background/0'
+      } backdrop-blur-none data-[menu-open=true]:backdrop-blur-none backdrop-saturate-1000 p-5 transition-all duration-500 ease-in-out`}
     >
       <NavbarContent className='md:basis-1/5 sm:basis-full' justify='start'>
         <NavbarBrand as='li' className='gap-3 max-w-fit'>
@@ -48,13 +65,13 @@ export const Navbar = () => {
         className='hidden md:flex md:basis-1/5 sm:basis-full'
         justify='center'
       >
-        <ul className='justify-start hidden gap-5 ml-4 md:flex'>
+        <ul className='justify-start hidden ml-4 gap-x-8 md:flex'>
           {siteConfig.navItems.map((item) => (
             <NavbarItem as='li' key={item.href}>
               <Link
                 className={clsx(
                   linkStyles({ color: 'foreground' }),
-                  'data-[active=true]:text-primary data-[active=true]:font-medium text-[#ADB9C7l] hover:opacity-100 hover:text-white hover:after:absolute hover:after:inset-x-2 hover:after:bottom-[-6px] hover:after:h-0.5 hover:after:bg-[#1E50FF] hover:after:transform after:scale-x-0 hover:after:scale-x-100 hover:after:origin-bottom hover:after:transition-transform hover:after:duration-300 hover:after:ease-in-out'
+                  'text-[#ADB9C7l] hover:opacity-100 hover:text-white hover:after:absolute hover:after:inset-x-2 hover:after:bottom-[-6px] hover:after:h-0.5 hover:after:bg-[#1E50FF] hover:after:transform after:scale-x-0 hover:after:scale-x-100 hover:after:origin-bottom hover:after:transition-transform hover:after:duration-300 hover:after:ease-in-out'
                 )}
                 color='foreground'
                 href={item.href}
@@ -82,19 +99,32 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent className='pl-4 md:hidden basis-1' justify='end'>
-        {/* <ThemeSwitch /> */}
         <NavbarMenuToggle />
       </NavbarContent>
 
       <NavbarMenu>
-        <div className='flex flex-col gap-2 mx-4 mt-2'>
+        <div className='flex flex-col gap-4 mx-4 mt-10'>
           {siteConfig.navItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              <Link href={item.href} color='foreground' size='lg'>
+              <Link
+                href={item.href}
+                color='foreground'
+                className='text-[20px] hover:after:absolute hover:after:inset-x-2 hover:after:bottom-[-6px] hover:after:h-0.5 hover:after:bg-[#1E50FF] hover:after:transform after:scale-x-0 hover:after:scale-x-100 hover:after:origin-bottom hover:after:transition-transform hover:after:duration-300 hover:after:ease-in-out'
+              >
                 {item.label}
               </Link>
             </NavbarMenuItem>
           ))}
+
+          <NavbarMenuItem>
+            <Link
+              href='/membership'
+              color='foreground'
+              className='text-[20px] hover:after:absolute hover:after:inset-x-2 hover:after:bottom-[-6px] hover:after:h-0.5 hover:after:bg-[#1E50FF] hover:after:transform after:scale-x-0 hover:after:scale-x-100 hover:after:origin-bottom hover:after:transition-transform hover:after:duration-300 hover:after:ease-in-out'
+            >
+              Membership
+            </Link>
+          </NavbarMenuItem>
         </div>
       </NavbarMenu>
     </NextUINavbar>

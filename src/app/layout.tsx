@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import { fontSans } from '@/config/fonts';
 import { Navbar } from '@/components/navbar';
 import Footer from '@/components/Footer';
+import Social from '@/components/social';
 
 export const metadata: Metadata = {
   title: siteConfig.name,
@@ -37,6 +38,7 @@ export default function RootLayout({
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
           <div className='relative flex flex-col h-full bg-gradient-to-br from-blue-900/10 via-blue-900/20 to-blue-900/40'>
             <Navbar />
+            <Social />
             <main className='container flex-grow px-6 pt-16 mx-auto max-w-7xl'>
               {children}
             </main>

@@ -30,17 +30,12 @@ export const siteConfig = {
       href: '/contact',
       active: false,
     },
-    // {
-    //   label: 'Membership',
-    //   href: '/membership',
-    //   active: false,
-    // },
   ],
-  links: {
-    facebook: 'https://facebook.com/nibmcs',
-    instagram: 'https://instagram.com/nibmcs',
-    twitter: 'https://twitter.com/nibmcs',
-    linkedin: 'https://linkedin.com/company/nibmcs',
-    github: 'https://github.com/nibmcs',
-  },
+  // links: {
+  //   facebook: 'https://facebook.com/nibmcs',
+  //   instagram: 'https://instagram.com/nibmcs',
+  //   twitter: 'https://twitter.com/nibmcs',
+  //   linkedin: 'https://linkedin.com/company/nibmcs',
+  //   github: 'https://github.com/nibmcs',
+  // },
 };
