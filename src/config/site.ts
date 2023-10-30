@@ -1,40 +1,41 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "NIBM Computing Society",
+  name: 'NIBM Computing Society',
   description:
-    "We are a student community organization for the NIBM - Sri Lanka, established with the aim of enabling us to learn, share, and build our professions.",
+    'We are a student community organization for the NIBM - Sri Lanka, established with the aim of enabling us to learn, share, and build our professions.',
   navItems: [
     {
-      label: "Events",
-      href: "/events",
+      label: 'Events',
+      href: '/events',
+      active: false,
     },
     {
-      label: "Leaderboard",
-      href: "/leaderboard",
+      label: 'Leaderboard',
+      href: '/leaderboard',
+      active: false,
     },
     {
-      label: "Blog",
-      href: "/blog",
+      label: 'Blog',
+      href: '/blog',
+      active: false,
     },
     {
-      label: "About",
-      href: "/about",
+      label: 'About',
+      href: '/about',
+      active: false,
     },
     {
-      label: "Contact",
-      href: "/contact",
-    },
-    {
-      label: "Membership",
-      href: "/membership",
+      label: 'Contact',
+      href: '/contact',
+      active: false,
     },
   ],
-  links: {
-    facebook: "https://facebook.com/nibmcs",
-    instagram: "https://instagram.com/nibmcs",
-    twitter: "https://twitter.com/nibmcs",
-    linkedin: "https://linkedin.com/company/nibmcs",
-    github: "https://github.com/nibmcs",
-  },
+  // links: {
+  //   facebook: 'https://facebook.com/nibmcs',
+  //   instagram: 'https://instagram.com/nibmcs',
+  //   twitter: 'https://twitter.com/nibmcs',
+  //   linkedin: 'https://linkedin.com/company/nibmcs',
+  //   github: 'https://github.com/nibmcs',
+  // },
 };

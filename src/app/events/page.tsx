@@ -1,56 +1,40 @@
 "use client"
 import React from "react";
-import { Card, CardFooter, Button, Image, CardBody } from "@nextui-org/react";
-import { DateIcon, LocationPinIcon } from "@/components/icons";
-import NextLink from "next/link";
+import EventsCard from "./components/eventCard";
+
+const events = [
+  {
+    title: 'Event 1',
+    date: '2023-10-31',
+    location: 'Venue 1',
+  },
+  {
+    title: 'Event 2',
+    date: '2023-11-05',
+    location: 'Venue 2',
+  },
+  {
+    title: 'Event 3',
+    date: '2023-11-12',
+    location: 'Venue 3',
+  },
+  {
+    title: 'Event 4',
+    date: '2023-11-18',
+    location: 'Venue 4',
+  },
+];
 
 export default function EventsPage() {
   return (
-    <>
-      <Card
-        radius="lg"
-        className="border-none"
-        style={{ width: 350 }}
-      >
-        <Card
-          isFooterBlurred
-          radius="lg"
-          className="border-none"
-        >
-          <Image
-            isZoomed
-            alt="Git & Github Event"
-            className="object-cover"
-            src="/events/01/thumbnail.jpg"
-            height={280}
-            width={350}
-          />
-          <CardFooter className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-            <p className="text-tiny text-white/80">Already Held!</p>
-            <NextLink href="/events/event/1">
-              <Button className="text-tiny text-white bg-black/20" variant="flat" color="default" radius="lg" size="sm">
-                View More
-              </Button>
-            </NextLink>
-          </CardFooter>
-        </Card>
-        <CardBody className="px-3 py-1 mb-2">
-          <h4 className="font-bold text-large text-center">Git & GitHub</h4>
-          <div className="justify-center sm:flex py-1">
-            <>
-              <DateIcon />
-              <span className="font-light pl-1" style={{ fontSize: '75%' }}>03/03/2023</span>
-            </>
-            <>
-              <LocationPinIcon />
-              <span className="font-light pl-1" style={{ fontSize: '75%' }}>NIBM</span>
-            </>
+    <div className="container mx-auto px-4">
+      <div className="flex flex-wrap mx-4">
+        {events.map((event, index) => (
+          <div key={index} className="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/3 xl:w-1/3 2xl:w-1/3 px-3">
+            <EventsCard />
           </div>
-          <div className="text-tiny px-2 text-center">
-            <p>Introduction to Git & GitHub conducted by GitHub Campus Expert Suvin Nimnaka</p>
-          </div>
-        </CardBody>
-      </Card>
-    </>
+        ))}
+      </div>
+    </div>
   );
 }
