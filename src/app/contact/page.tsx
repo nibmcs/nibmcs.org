@@ -13,6 +13,7 @@ import { fadeIn } from '../../utils/variants';
 import emailjs from '@emailjs/browser';
 import 'react-toastify/dist/ReactToastify.css';
 import Map from '../../components/map';
+import Box from '../../components/box';
 
 export default function ContactPage() {
   const ref: any = useRef();
@@ -137,39 +138,17 @@ export default function ContactPage() {
           exit='hidden'
           className='w-full h-full pt-2 lg:w-1/2'
         >
-          <div className='flex flex-col items-center w-full gap-2 mb-6 p-4 border-2 border-[#1E50FF] rounded-lg justify-center h-[200px] lg:h-full'>
-            <div className='flex flex-col items-center gap-1'>
-              <HiOutlineMapPin className='text-white/60 text-[30px] text-center' />
-              <h2 className='text-[#ADB9C7] font-semibold text-[16px] tracking-wider'>
-                Address
-              </h2>
-              <p className='text-[#fff] text-[14px] tracking-widest'>
-                120/5 Vidya Mawatha, Colombo 00700
-              </p>
-            </div>
-          </div>
-          <div className='flex flex-col items-center w-full gap-2 mb-6 p-4 border-2 border-[#1E50FF] rounded-lg justify-center h-[200px] lg:h-full'>
-            <div className='flex flex-col items-center gap-1'>
-              <HiOutlineEnvelope className='text-white/60 text-[30px]' />
-              <h2 className='text-[#ADB9C7] font-semibold text-[16px] tracking-wider'>
-                Email
-              </h2>
-              <p className='text-[#fff] text-[14px] tracking-widest'>
-                info@nibmcs.org
-              </p>
-            </div>
-          </div>
-          <div className='flex flex-col items-center w-full gap-2 p-4 border-2 border-[#1E50FF] rounded-lg text-center justify-center h-[200px] lg:h-full'>
-            <div className='flex flex-col items-center gap-1'>
-              <HiOutlinePhone className='text-white/60 text-[30px]' />
-              <h2 className='text-[#ADB9C7] font-semibold text-[16px] tracking-wider'>
-                Phone
-              </h2>
-              <p className='text-[#fff] text-[14px] tracking-widest'>
-                +94712224455
-              </p>
-            </div>
-          </div>
+          <Box
+            icon={<HiOutlineMapPin />}
+            name={'Address'}
+            para={'120/5 Vidya Mawatha, Colombo 00700'}
+          />
+          <Box
+            icon={<HiOutlineEnvelope />}
+            name={'Email'}
+            para={'info@nibmcs.org'}
+          />
+          <Box icon={<HiOutlinePhone />} name={'Phone'} para={'+94712691003'} />
         </motion.div>
       </div>
     </>
