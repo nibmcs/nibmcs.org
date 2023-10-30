@@ -73,7 +73,7 @@ export default function ContactPage() {
               exit='hidden'
               className='mb-12 text-center text-[32px] md:text-[48px] leading-tight font-semibold'
             >
-              Let's <span className='text-[#1E50FF]'>connect.</span>
+              Let&apos;s <span className='text-[#1E50FF]'>connect.</span>
             </motion.h2>
 
             <motion.form
@@ -117,7 +117,7 @@ export default function ContactPage() {
                 className='border rounded-full h-[52px] border-white/50 max-w-[170px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-[#1E50FF] group'
               >
                 <span className='group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-500'>
-                  Let's talk
+                  Let&apos;s talk
                 </span>
                 <BsArrowRight className='-translate-y-[120%] opacity-0 group-hover:flex group-hover:-translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute text-[22px]' />
               </button>
