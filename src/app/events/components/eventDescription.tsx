@@ -30,7 +30,7 @@ export default function EventDescription() {
                                                 <div className="text-base">Time/Date</div>
                                             </div>
                                             <p className="leading-loose text-gray-500">
-                                                03/03/2023
+                                                03/03/2023 | 9.00 Am Onwards
                                             </p>
                                         </div>
                                         <div className="w-full mb-2">
