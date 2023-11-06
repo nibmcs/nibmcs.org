@@ -21,6 +21,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-icons": "^4.11.0",
+    "rss-parser": "^3.13.0",
     "sanity": "^3.16.7",
     "styled-components": "5.2"
   },
