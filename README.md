@@ -1,7 +1,5 @@
 # NIBM Computing Society Website
 
-[![Docker Build and Run](https://github.com/nibmcs/nibmcs.org/actions/workflows/main.yml/badge.svg)](https://github.com/nibmcs/nibmcs.org/actions/workflows/main.yml)
-
 Welcome to the NIBM Computing Society website repository. This website is built using Next.js as the frontend framework and Sanity as the content management system (CMS).
 
 ## About NIBM Computing Society
@@ -21,6 +19,7 @@ Welcome to the NIBM Computing Society website repository. This website is built 
 - [Next.js](https://nextjs.org/) - A React framework for building fast and scalable applications.
 - [Sanity](https://www.sanity.io/) - A headless CMS that provides a powerful and flexible content backend.
 - [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapidly building custom designs.
+- [Vercel](https://vercel.com/) - A cloud platform for static sites and serverless functions.
 
 ## Getting Started
 
