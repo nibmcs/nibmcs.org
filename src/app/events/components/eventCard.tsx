@@ -9,13 +9,16 @@ export default function EventsCard() {
         <>
             <Card
                 radius="lg"
-                className="border-none mb-6 mx-1"
+                className="border-none mb-6 mx-1 bg-background/60 dark:bg-default-100/50"
+                shadow="sm"
                 style={{ width: 350 }}
+                isBlurred
             >
                 <Card
                     isFooterBlurred
                     radius="lg"
                     className="border-none"
+
                 >
                     <Image
                         isZoomed

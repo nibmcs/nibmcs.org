@@ -7,7 +7,7 @@ export default function Sponsors() {
         <>
             <Card
                 radius="lg"
-                className="border-none w-full mt-4">
+                className="border-none w-full mt-4 bg-background/60 dark:bg-default-100/50">
                 <div className="flex justify-center w-full">
                     <div className="w-full my-4">
                         <p className="font-mono uppercase text-center font-medium text-lg text-gray-600">Partners</p>
