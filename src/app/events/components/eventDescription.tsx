@@ -25,30 +25,30 @@ export default function EventDescription({ event }: Props) {
                                             <div className="flex items-center">
                                                 <div className="text-base">Venue</div>
                                             </div>
-                                            <p className="leading-loose text-gray-500">
+                                            <div className="leading-loose text-gray-500">
                                                 {event.location}
-                                            </p>
+                                            </div>
                                         </div>
                                         <div className="w-full mb-3">
                                             <div className="flex items-center">
                                                 <div className="text-base">Time/Date</div>
                                             </div>
-                                            <p className="leading-loose text-gray-500">
+                                            <div className="leading-loose text-gray-500">
                                                 {new Date(event.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} | {new Date(event.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} Onwards
-                                            </p>
+                                            </div>
                                         </div>
                                         <div className="w-full mb-2">
                                             <div className="flex items-center">
                                                 <div className="text-base">Conducted By</div>
                                             </div>
-                                            <p className="mt-2 text-gray-500">
+                                            <div className="mt-2 text-gray-500">
                                                 {event.conductedBy.map((speaker: any, index: any) => (
                                                     <>
                                                         <span key={index}> {speaker.role} {speaker.speaker}</span>
                                                         <span key={index} className='last:hidden'>,</span>
                                                     </>
                                                 ))}
-                                            </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
