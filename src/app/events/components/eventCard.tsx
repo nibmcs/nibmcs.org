@@ -13,8 +13,10 @@ export default function EventsCard({ event }: Props) {
         <ClientSideRoute route={`/events/${event.slug.current}`} >
             <Card
                 radius="lg"
-                className="border-none mb-6 mx-1"
+                className="border-none mb-6 mx-1 bg-background/60 dark:bg-default-100/50"
+                shadow="sm"
                 style={{ width: 350 }}
+                isBlurred
             >
                 <Card
                     isFooterBlurred
@@ -51,7 +53,7 @@ export default function EventsCard({ event }: Props) {
                     <div className="text-xs px-2 text-center">
                         <div>{event.title} conducted by</div>
                         {event.conductedBy.map((speaker: any, index: any) => (
-                            <div>{speaker.role} {speaker.speaker}</div>
+                            <div key={index}>{speaker.role} {speaker.speaker}</div>
                         ))}
                     </div>
                 </CardBody>
