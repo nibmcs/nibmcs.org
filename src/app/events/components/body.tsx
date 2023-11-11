@@ -8,8 +8,8 @@ interface Props {
 export default function Body({ event }: Props) {
     return (
         <>
-            <Sponsors />
-            <EventDescription />
+            {event.sponsors && <Sponsors event={event} />}
+            <EventDescription event={event} />
         </>
     )
 }

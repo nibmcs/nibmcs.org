@@ -26,6 +26,8 @@ export async function getEventBySlug(slug: any) {
     description,
     location,
     conductedBy,
+    sponsors[]-> {title, logo{"image": asset->url }, link},
   }`;
+
   return client.fetch(query, { slug });
 }

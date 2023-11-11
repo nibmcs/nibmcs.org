@@ -1,7 +1,11 @@
 'use client'
 import { Card } from "@nextui-org/react";
 
-export default function EventDescription() {
+interface Props {
+    event: any
+}
+
+export default function EventDescription({ event }: Props) {
     return (
         <>
             <div className="mx-auto w-full mt-4">
@@ -22,7 +26,7 @@ export default function EventDescription() {
                                                 <div className="text-base">Venue</div>
                                             </div>
                                             <p className="leading-loose text-gray-500">
-                                                NIBM - Harrison Hall
+                                                {event.location}
                                             </p>
                                         </div>
                                         <div className="w-full mb-3">
@@ -30,15 +34,20 @@ export default function EventDescription() {
                                                 <div className="text-base">Time/Date</div>
                                             </div>
                                             <p className="leading-loose text-gray-500">
-                                                03/03/2023 | 9.00 Am Onwards
+                                                {new Date(event.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} | {new Date(event.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} Onwards
                                             </p>
                                         </div>
                                         <div className="w-full mb-2">
                                             <div className="flex items-center">
                                                 <div className="text-base">Conducted By</div>
                                             </div>
-                                            <p className="leading-loose text-gray-500">
-                                                Suvin Nimnaka
+                                            <p className="mt-2 text-gray-500">
+                                                {event.conductedBy.map((speaker: any, index: any) => (
+                                                    <>
+                                                        <span key={index}> {speaker.role} {speaker.speaker}</span>
+                                                        <span key={index} className='last:hidden'>,</span>
+                                                    </>
+                                                ))}
                                             </p>
                                         </div>
                                     </div>
@@ -57,7 +66,7 @@ export default function EventDescription() {
                                             </div>
                                             <div className="w-full">
                                                 <p className="leading-loose text-gray-500">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, et eos! Enim, reprehenderit! Eius, asperiores provident repudiandae impedit dolorem ea officia molestiae quisquam tenetur reiciendis voluptatem officiis debitis fugit rerum?
+                                                    {event.description}
                                                 </p>
                                             </div>
                                         </div>

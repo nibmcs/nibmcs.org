@@ -1,18 +1,29 @@
-import { defineField } from 'sanity';
+import { defineType } from 'sanity';
 
-export default defineField({
+export default defineType({
   name: 'sponsors',
   title: 'Sponsors',
-  type: 'array',
-  of: [
+  type: 'document',
+  fields: [
     {
-      type: 'object',
-      name: 'Sponsor',
-      fields: [
-        { type: 'string', name: 'name' },
-        { type: 'image', name: 'logo' },
-        { type: 'url', name: 'link' },
-      ],
+      name: 'title',
+      title: 'Sponsor Title',
+      type: 'string',
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'logo',
+      title: 'Sponsor Logo',
+      type: 'image',
+      description: 'Sponsor logo',
+      options: { hotspot: true },
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'link',
+      title: 'Sponsor Link',
+      type: 'url',
+      validation: (Rule: any) => Rule.required(),
     },
   ],
 });

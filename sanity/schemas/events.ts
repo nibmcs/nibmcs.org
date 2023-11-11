@@ -70,5 +70,11 @@ export default defineType({
       description: 'Images for the event',
       options: { hotspot: true },
     },
+    {
+      name: 'sponsors',
+      title: 'Sponsors',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'sponsors' } }],
+    },
   ],
 });
