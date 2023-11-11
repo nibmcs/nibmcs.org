@@ -8,20 +8,25 @@ interface PageProps {
 }
 
 const images = [
-    { id: 1, imgUrl: '/events/01/02.jpg' },
-    { id: 2, imgUrl: '/events/01/03.jpg' },
-    { id: 3, imgUrl: '/events/01/04.jpg' },
-    { id: 4, imgUrl: '/events/01/05.jpg' },
-    { id: 5, imgUrl: '/events/01/06.jpg' },
+    { id: 1, imgUrl: '/events/01/01.jpg' },
+    { id: 2, imgUrl: '/events/01/02.jpg' },
+    { id: 3, imgUrl: '/events/01/03.jpg' },
+    { id: 4, imgUrl: '/events/01/04.jpg' },
+    { id: 5, imgUrl: '/events/01/05.jpg' },
     { id: 6, imgUrl: '/events/01/06.jpg' },
-    { id: 7, imgUrl: '/events/01/06.jpg' },
+    { id: 7, imgUrl: '/events/01/07.jpg' },
 ];
 
-export default function Header({ params }: PageProps) {
+type Props = {
+    event: any
+}
+
+export default function Header({ event }: Props) {
+
     return (
         <main className="mx-auto max-w-[1960px]">
             <div className="columns-1 sm:columns-2 xl:columns-3 2xl:columns-4">
-                <div className="after:content relative mb-5 flex h-[620px] flex-col items-center justify-end gap-4 overflow-hidden rounded-lg bg-white/10 px-6 pb-16 pt-64 text-center text-white shadow-highlight after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight lg:pt-0">
+                <div className="after:content relative mb-5 flex h-[500px] flex-col items-center justify-end gap-4 overflow-hidden rounded-lg bg-white/10 px-6 pb-16 pt-64 text-center text-white shadow-highlight after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight lg:pt-0">
                     <div className="absolute inset-0 flex items-center justify-center opacity-20">
                         <span className="flex max-h-full max-w-full items-center justify-center">
                             {/* <Bridge /> */}

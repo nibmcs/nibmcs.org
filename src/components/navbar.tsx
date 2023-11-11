@@ -44,9 +44,9 @@ export const Navbar = () => {
       maxWidth='lg'
       position='sticky'
       className={`${scrolling
-          ? 'bg-black  backdrop-blur data-[menu-open=false]:backdrop-blur backdrop-saturate-50 p-5'
-          : 'bg-background/0'
-        } backdrop-blur-none data-[menu-open=true]:backdrop-blur-none backdrop-saturate-1000 p-5 transition-all duration-500 ease-in-out`}
+        ? 'bg-black  backdrop-blur data-[menu-open=false]:backdrop-blur backdrop-saturate-50 p-5'
+        : 'bg-background/0'
+        } backdrop-blur-none data-[menu-open=true]:backdrop-blur-none backdrop-saturate-1000 p-5 transition-all duration-500 ease-in-out ${pathname.startsWith("/studio") ? "hidden" : ""}`}
     >
       <NavbarContent className='md:basis-1/5 sm:basis-full' justify='start'>
         <NavbarBrand as='li' className='gap-3 max-w-fit'>
@@ -108,8 +108,8 @@ export const Navbar = () => {
                 href={item.href}
                 color='foreground'
                 className={`text-[20px] hover:after:absolute hover:after:inset-x-2 hover:after:bottom-[-6px] hover:after:h-0.5 hover:after:bg-[#1E50FF] hover:after:transform after:scale-x-0 hover:after:scale-x-100 hover:after:origin-bottom hover:after:transition-transform hover:after:duration-300 hover:after:ease-in-out ${pathname.startsWith(item.href)
-                    ? 'after:absolute after:inset-x-2 after:bottom-[-6px] after:h-0.5 after:bg-[#1E50FF] after:transform after:scale-x-100 after:origin-bottom text-white'
-                    : ''
+                  ? 'after:absolute after:inset-x-2 after:bottom-[-6px] after:h-0.5 after:bg-[#1E50FF] after:transform after:scale-x-100 after:origin-bottom text-white'
+                  : ''
                   }`}
               >
                 {item.label}

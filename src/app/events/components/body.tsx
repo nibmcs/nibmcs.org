@@ -1,13 +1,11 @@
 import EventDescription from "./eventDescription"
 import Sponsors from "./sponsors"
 
-interface PageProps {
-    params: {
-        id: string
-    }
+interface Props {
+    event: any
 }
 
-export default function Body({ params }: PageProps) {
+export default function Body({ event }: Props) {
     return (
         <>
             <Sponsors />

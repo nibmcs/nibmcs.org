@@ -39,13 +39,11 @@ export default function RootLayout({
           <div className='relative flex flex-col h-full bg-gradient-to-br from-blue-900/10 via-blue-900/20 to-blue-900/40'>
             <Navbar />
             <Social />
-            <main className='container flex-grow px-6 pt-16 mx-auto max-w-7xl'>
-              {children}
-            </main>
+            {children}
             <Footer />
           </div>
         </Providers>
       </body>
-    </html>
+    </html >
   );
 }
